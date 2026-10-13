@@ -16,7 +16,7 @@ app.use(
   cors({
     origin: [
       "http://localhost:3000",
-      "https://task-management-system-eight-ruby.vercel.app/",
+      "https://task-management-system-eight-ruby.vercel.app",
     ],
     credentials: true,
   }),
