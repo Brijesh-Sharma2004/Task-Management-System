@@ -18,6 +18,8 @@ export default function LoginPage() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
+    setLoading(true);
     setError("");
 
     try {
@@ -41,39 +43,10 @@ export default function LoginPage() {
       setError(
         err.response?.data?.message || "Login failed. Please try again.",
       );
+    } finally {
+      setLoading(false);
     }
   };
-  // const handleSubmit = async (event) => {
-  //   event.preventDefault();
-  //   setError("");
-
-  //   try {
-  //     setLoading(true);
-
-  //     const response = await api.post("/auth/login", {
-  //       email: email.trim().toLowerCase(),
-  //       password,
-  //     });
-
-  //     const token = response.data.token;
-
-  //     if (!token) {
-  //       setError("Login response did not include a token.");
-  //       return;
-  //     }
-
-  //     localStorage.setItem("token", token);
-
-  //     router.replace("/tasks");
-  //   } catch (err) {
-  //     setError(
-  //       err.response?.data?.message ||
-  //         "Login failed. Please check your details.",
-  //     );
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
 
   return (
     <main className="flex min-h-screen items-center justify-center px-4 py-10">
@@ -128,7 +101,15 @@ export default function LoginPage() {
             disabled={loading}
             className="w-full rounded-lg bg-blue-600 p-3 font-semibold text-white hover:bg-blue-700 disabled:opacity-60"
           >
-            {loading ? "Logging in..." : "Log in"}
+            {/* {loading ? "Logging in..." : "Log in"}  */}
+            {loading ? (
+              <>
+                <span className="animate-spin">⏳</span>
+                Logging in...
+              </>
+            ) : (
+              "Login"
+            )}
           </button>
         </form>
 
